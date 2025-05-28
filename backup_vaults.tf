@@ -3,22 +3,12 @@
 #
 # This configuration will:
 # 1. Enable the Backup and DR API.
-# 2. Create a Backup and DR Management Server.
-# 3. Create a Backup Vault.
+# 2. Create a Backup Vault.
 #
 # IMPORTANT:
 # - VM Protection: This code sets up the Backup and DR infrastructure.
 #   Configuring backup policies and assigning VMs to backup plans is a
 #   separate step done via the GCP Console or gcloud commands.
-# - Provisioning Time: The Management Server can take a significant amount
-#   of time to provision (e.g., 25-60 minutes).
-# - Network: Ensure the specified VPC network exists and is correctly configured.
-#   The Management Server will be deployed into this network.
-# - IAM Permissions: The Backup and DR service agent (e.g.,
-#   service-<PROJECT_NUMBER>@gcp-sa-backupdr.iam.gserviceaccount.com) will
-#   need appropriate permissions (like Compute Instance Admin (v1) and Service
-#   Account Token Creator) on the projects/VMs you intend to back up.
-#   This might need to be configured separately.
 # ------------------------------------------------------------------------------
 
 terraform {
@@ -32,7 +22,6 @@ terraform {
 
 provider "google" {
   project = "argo-svc-dev-2"
-#  region  = "australia-southeast1"
 }
 
 resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
