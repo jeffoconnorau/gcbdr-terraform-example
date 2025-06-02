@@ -21,7 +21,7 @@ terraform {
 }
 
 provider "google" {
-  project = "argo-svc-dev-2"
+  project = "glabco-bdr-1"
 }
 
 resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
@@ -55,7 +55,7 @@ resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
 }
 # Enable Log Analytics in the project - to ensure logs can be used for reporting
 resource "google_logging_project_bucket_config" "analytics-enabled-bucket" {
-    project          = "argo-svc-dev-2"
+    project          = "glabco-bdr-1"
     location         = "global"
     retention_days   = 300
     enable_analytics = true
