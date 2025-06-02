@@ -26,7 +26,7 @@ provider "google" {
 
 resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
   location                                   = "australia-southeast1"
-  backup_vault_id                            = "argo-svc-dev-2-bv-au-1"
+  backup_vault_id                            = "bv-au-1"
   description                                = "This is a backup vault built by Terraform"
   backup_minimum_enforced_retention_duration = "86400s"
   annotations = {
@@ -47,7 +47,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
 
 #Now for Backup Vault to protect VMs in a different project - add backup vault service agent to that project.
 resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
-  project = "argo-svc-infra-prod"
+  project = "glabco-sp-1"
   role    = "roles/backupdr.computeEngineOperator"
   members = [
      "serviceAccount:${google_backup_dr_backup_vault.backup-vault-au-1.service_account}"
