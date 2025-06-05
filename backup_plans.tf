@@ -1,6 +1,6 @@
 # Create Backup Plans with multiple Rules
 
-resource "google_backup_dr_backup_plan" "au-backup-plan-1" {
+resource "google_backup_dr_backup_plan" "au-vm-backup-plan-1" {
   location       = "australia-southeast1"
   backup_plan_id = "gold-backup-plan-au-1"
   resource_type  = "compute.googleapis.com/Instance"
@@ -69,7 +69,7 @@ resource "google_backup_dr_backup_plan" "au-backup-plan-1" {
   }
 }
 
-resource "google_backup_dr_backup_plan" "au-backup-plan-2" {
+resource "google_backup_dr_backup_plan" "au-vm-backup-plan-2" {
   location       = "australia-southeast1"
   backup_plan_id = "silver-backup-plan-au-2"
   resource_type  = "compute.googleapis.com/Instance"
@@ -108,7 +108,7 @@ resource "google_backup_dr_backup_plan" "au-backup-plan-2" {
   }
 }
 
-resource "google_backup_dr_backup_plan" "au-backup-plan-3" {
+resource "google_backup_dr_backup_plan" "au-vm-backup-plan-3" {
   location       = "australia-southeast1"
   backup_plan_id = "bronze-backup-plan-au-3"
   resource_type  = "compute.googleapis.com/Instance"
@@ -132,7 +132,7 @@ resource "google_backup_dr_backup_plan" "au-backup-plan-3" {
   }
 }
 
-resource "google_backup_dr_backup_plan" "us-backup-plan-1" {
+resource "google_backup_dr_backup_plan" "us-vm-backup-plan-1" {
   location       = "us-west2"
   backup_plan_id = "basic-backup-plan-us-1"
   resource_type  = "compute.googleapis.com/Instance"
