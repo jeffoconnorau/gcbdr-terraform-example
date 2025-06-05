@@ -65,7 +65,8 @@ resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
   project = "glabco-sp-1"
   role    = "roles/backupdr.computeEngineOperator"
   members = [
-     "serviceAccount:${google_backup_dr_backup_vault.backup-vault-au-1.service_account}"
+     "serviceAccount:${google_backup_dr_backup_vault.backup-vault-au-1.service_account}",
+     "serviceAccount:${google_backup_dr_backup_vault.backup-vault-us-1.service_account}"
   ]
 }
 # Enable Log Analytics in the project - to ensure logs can be used for reporting
