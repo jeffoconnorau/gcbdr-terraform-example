@@ -32,8 +32,8 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_01_plan_associati
   provider = google.gcp_bdr
   project  = "glabco-bdr-1"
   location = "us-west2"
-  name     = "lax-linux-01-basic-plan-assoc" # Name for the association resource
-
+  #name     = "lax-linux-01-basic-plan-assoc" # Name for the association resource
+  backup_plan_association_id          = "lax-linux-01-basic-plan-assoc"
   plan     = google_backup_dr_backup_plan.us-vm-backup-plan-1.id
   resource = data.google_compute_instance.lax_linux_01.self_link # The resource to associate
 }
@@ -42,8 +42,8 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_02_plan_associati
   provider = google.gcp_bdr
   project  = "glabco-bdr-1"
   location = "us-west2"
-  name     = "lax-linux-02-basic-plan-assoc" # Name for the association resource
-
+  #name     = "lax-linux-02-basic-plan-assoc" # Name for the association resource
+  backup_plan_association_id          = "lax-linux-02-basic-plan-assoc"
   plan     = google_backup_dr_backup_plan.us-vm-backup-plan-1.id
   resource = data.google_compute_instance.lax_linux_02.self_link # The resource to associate
 }
