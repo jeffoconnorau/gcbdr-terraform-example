@@ -74,7 +74,7 @@ resource "google_monitoring_alert_policy" "backup_dr_successful_restore_alert" {
   project      = "glabco-bdr-1"
   display_name = "Backup DR Restore Job Successful"
   combiner     = "OR"
-  severity     = "INFO" # Or consider "INFO" for success
+  severity     = "" # Or consider "WARNING" for success
 
   conditions {
     display_name = "Log match: Successful Backup DR Restore Jobs"
