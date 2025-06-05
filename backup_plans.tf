@@ -131,3 +131,27 @@ resource "google_backup_dr_backup_plan" "au-backup-plan-3" {
     }
   }
 }
+
+resource "google_backup_dr_backup_plan" "us-backup-plan-1" {
+  location       = "us-west2"
+  backup_plan_id = "basic-backup-plan-us-1"
+  resource_type  = "compute.googleapis.com/Instance"
+  backup_vault   = google_backup_dr_backup_vault.backup-vault-us-1.id
+  description    = "Terraform created Backup Plan for Bronze workloads running in australia-southeast1"
+
+  backup_rules {
+    rule_id                = "daily-backup"
+    backup_retention_days  = 7
+
+    standard_schedule {
+      recurrence_type     = "DAILY" #HOURLY, DAILY, WEEKLY, MONTHLY, YEARLY
+      hourly_frequency    = 24
+      time_zone           = "Australia/Sydney" #UTC is also possible
+
+      backup_window {
+        start_hour_of_day = 0 #backup window opens at midnight
+        end_hour_of_day   = 6 #backup window closes at 6am
+      }
+    }
+  }
+}
