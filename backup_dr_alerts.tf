@@ -1,14 +1,16 @@
 # This file is for configuring alerts related to Google Cloud Backup and DR.
 
-#provider "google" {
- # project = "glabco-sp-1"
-  # Assuming the region might be needed for some monitoring resources,
-  # let's add a common one. This can be adjusted if specific resources need otherwise.
-  # region  = "us-west1"
-#}
+# Provider for Backup & DR resources in the glabco-bdr-1 project
+provider "google" {
+  alias   = "gcp_bdr"
+  project = "glabco-bdr-1"
+  # region  = "us-west1" # Optional: specify if needed
+}
 
 # Resources for logging metric, alert policy, and notification channel will be added here.
 resource "google_monitoring_notification_channel" "backup_dr_failure_email_channel" {
+  provider     = google.gcp_bdr
+  project      = "glabco-bdr-1"
   display_name = "Backup DR Job Failure Email (jeff@glabco.com)"
   type         = "email"
 
@@ -22,6 +24,8 @@ resource "google_monitoring_notification_channel" "backup_dr_failure_email_chann
 }
 
 resource "google_monitoring_alert_policy" "backup_dr_job_failure_alert" {
+  provider     = google.gcp_bdr
+  project      = "glabco-bdr-1"
   display_name = "Backup DR Scheduled Backup Job Failed"
   combiner     = "OR"          # How to combine conditions (only one condition here, so OR/AND doesn't matter much)
   severity     = "WARNING"
