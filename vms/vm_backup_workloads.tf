@@ -28,15 +28,6 @@ data "google_compute_instance" "lax_linux_02" {
   zone     = "us-west2-c"       # Zone of the lax-linux-02 VM
 }
 
-resource "google_backup_dr_backup_plan_association" "my-backup-plan-association" {
-  location = "us-central1"
-  resource_type= "compute.googleapis.com/Instance"
-  backup_plan_association_id          = "my-bpa"
-  resource      = google_compute_instance.myinstance.id
-  backup_plan  = google_backup_dr_backup_plan.bp1.name
-}
-
-
 resource "google_backup_dr_backup_plan_association" "lax_linux_01_plan_association" {
   provider = google.gcp_bdr
   project  = "glabco-bdr-1"
