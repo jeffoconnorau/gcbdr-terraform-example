@@ -77,22 +77,4 @@ resource "google_compute_disk" "default" {
   zone  = "us-west2-c"
 }
 
-module "ops_agent_policy" {
-  source          = "github.com/terraform-google-modules/terraform-google-cloud-operations/modules/ops-agent-policy"
-  project         = "glabco-sp-1"
-  zone            = "us-west2-c"
-  assignment_id   = "goog-ops-agent-v2-x86-template-1-4-0-us-west2-c"
-  agents_rule = {
-    package_state = "installed"
-    version = "latest"
-  }
-  instance_filter = {
-    all = false
-    inclusion_labels = [{
-      labels = {
-        goog-ops-agent-policy = "v2-x86-template-1-4-0"
-      }
-    }]
-  }
-}
 
