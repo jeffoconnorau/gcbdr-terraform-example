@@ -26,7 +26,7 @@ resource "google_monitoring_notification_channel" "backup_dr_gchat_channel" {
   provider     = google.gcp_bdr
   project      = "glabco-bdr-1"
   display_name = "Backup DR Google Chat Space"
-  type         = "chat"
+  type         = "google_chat"
   labels = {
     space_name = "spaces/AAAAE4_y2WM"
   }
