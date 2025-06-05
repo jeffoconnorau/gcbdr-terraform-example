@@ -24,6 +24,7 @@ provider "google" {
   project = "glabco-bdr-1"
 }
 
+#create a region backup vault
 resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
   location                                   = "australia-southeast1"
   backup_vault_id                            = "bv-au-1"
@@ -45,6 +46,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
 #  effective_time = "2025-05-21T00:00:00Z" # Time to lock the bucket in yyyy-mm-ddThh:mm:ssZ # this is an ISO 8601 time format, where Z symbolises UTC (Zulu) timezone.
 }
 
+#create a multi-region backup vault
 resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
   location                                   = "us"
   backup_vault_id                            = "bv-us-1"
