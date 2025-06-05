@@ -80,7 +80,7 @@ resource "null_resource" "stop_lax_linux_01" {
   depends_on = [google_compute_instance.lax-linux-01]
 
   provisioner "local-exec" {
-    command = "sleep 30 && gcloud compute instances stop lax-linux-01 --zone=us-west2-c --project=glabco-sp-1 || true"
+    command = "sleep 15 && gcloud compute instances stop lax-linux-01 --zone=us-west2-c --project=glabco-sp-1 || true"
   }
 }
 
@@ -159,7 +159,7 @@ resource "null_resource" "stop_lax_linux_02" {
   depends_on = [google_compute_instance.lax-linux-02]
 
   provisioner "local-exec" {
-    command = "sleep 30 && gcloud compute instances stop lax-linux-02 --zone=us-west2-c --project=glabco-sp-1 || true"
+    command = "sleep 15 && gcloud compute instances stop lax-linux-02 --zone=us-west2-c --project=glabco-sp-1 || true"
   }
 }
 
@@ -238,7 +238,7 @@ resource "null_resource" "stop_lax_linux_03" {
   depends_on = [google_compute_instance.lax-linux-03]
 
   provisioner "local-exec" {
-    command = "sleep 30 && gcloud compute instances stop lax-linux-03 --zone=us-west2-c --project=glabco-sp-1 || true"
+    command = "sleep 15 && gcloud compute instances stop lax-linux-03 --zone=us-west2-c --project=glabco-sp-1 || true"
   }
 }
 
@@ -317,7 +317,7 @@ resource "null_resource" "stop_lax_linux_04" {
   depends_on = [google_compute_instance.lax-linux-04]
 
   provisioner "local-exec" {
-    command = "sleep 30 && gcloud compute instances stop lax-linux-04 --zone=us-west2-c --project=glabco-sp-1 || true"
+    command = "sleep 15 && gcloud compute instances stop lax-linux-04 --zone=us-west2-c --project=glabco-sp-1 || true"
   }
 }
 
