@@ -6,10 +6,11 @@ provider "google" {
 }
 
 resource "google_compute_instance" "lax-linux-01" {
-#  attached_disk {
-#    device_name = "lax-linux-01-data-1"
-#    mode        = "READ_WRITE"
-#  }
+  attached_disk {
+    source      = google_compute_disk.default.name
+    device_name = "lax-linux-01-data-disk"
+    mode        = "READ_WRITE"
+  }
 
   boot_disk {
     auto_delete = true
@@ -43,10 +44,6 @@ resource "google_compute_instance" "lax-linux-01" {
   name = "lax-linux-01"
 
   network_interface {
-    access_config {
-      network_tier = "PREMIUM"
-    }
-
     queue_count = 0
     stack_type  = "IPV4_ONLY"
     subnetwork  = "projects/glabco-hp-1/regions/us-west2/subnetworks/glabco-hp-1-sn-lax1"
@@ -71,6 +68,13 @@ resource "google_compute_instance" "lax-linux-01" {
   }
 
   zone = "us-west2-c"
+}
+
+resource "google_compute_disk" "default" {
+  name  = "lax-linux-01-disk-1"
+  type  = "pd-standard"
+  size  = 10
+  zone  = "us-west2-c"
 }
 
 module "ops_agent_policy" {
