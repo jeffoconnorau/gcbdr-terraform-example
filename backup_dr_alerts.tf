@@ -28,7 +28,7 @@ resource "google_monitoring_notification_channel" "backup_dr_gchat_channel" {
   display_name = "Backup DR Google Chat Space"
   type         = "google_chat"
   labels = {
-    space_name = "spaces/AAAAE4_y2WM"
+    space_name = "AAAAE4_y2WM"
   }
   description  = "Google Chat notification channel for Backup and DR alerts."
   # enabled    = true # Default is true
