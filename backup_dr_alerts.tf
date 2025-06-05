@@ -23,6 +23,18 @@ resource "google_monitoring_notification_channel" "backup_dr_failure_email_chann
   # enabled = true # This is true by default
 }
 
+resource "google_monitoring_notification_channel" "backup_dr_gchat_channel" {
+  provider     = google.gcp_bdr
+  project      = "glabco-bdr-1"
+  display_name = "Backup DR Google Chat Space"
+  type         = "chat"
+  labels = {
+    space_name = "spaces/AAAAE4_y2WM"
+  }
+  description  = "Google Chat notification channel for Backup and DR alerts."
+  # enabled    = true # Default is true
+}
+
 resource "google_monitoring_alert_policy" "backup_dr_job_failure_alert" {
   provider     = google.gcp_bdr
   project      = "glabco-bdr-1"
@@ -51,7 +63,8 @@ resource "google_monitoring_alert_policy" "backup_dr_job_failure_alert" {
   }
 
   notification_channels = [
-    google_monitoring_notification_channel.backup_dr_failure_email_channel.id
+    google_monitoring_notification_channel.backup_dr_failure_email_channel.id,
+    google_monitoring_notification_channel.backup_dr_gchat_channel.id
   ]
 
   documentation {
@@ -65,7 +78,8 @@ resource "google_monitoring_alert_policy" "backup_dr_job_failure_alert" {
   }
 
   depends_on = [
-    google_monitoring_notification_channel.backup_dr_failure_email_channel
+    google_monitoring_notification_channel.backup_dr_failure_email_channel,
+    google_monitoring_notification_channel.backup_dr_gchat_channel
   ]
 }
 
@@ -95,7 +109,8 @@ resource "google_monitoring_alert_policy" "backup_dr_successful_restore_alert" {
   }
 
   notification_channels = [
-    google_monitoring_notification_channel.backup_dr_failure_email_channel.id
+    google_monitoring_notification_channel.backup_dr_failure_email_channel.id,
+    google_monitoring_notification_channel.backup_dr_gchat_channel.id
   ]
 
   documentation {
@@ -109,7 +124,8 @@ resource "google_monitoring_alert_policy" "backup_dr_successful_restore_alert" {
   }
 
   depends_on = [
-    google_monitoring_notification_channel.backup_dr_failure_email_channel
+    google_monitoring_notification_channel.backup_dr_failure_email_channel,
+    google_monitoring_notification_channel.backup_dr_gchat_channel
   ]
 }
 
@@ -139,7 +155,8 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
   }
 
   notification_channels = [
-    google_monitoring_notification_channel.backup_dr_failure_email_channel.id
+    google_monitoring_notification_channel.backup_dr_failure_email_channel.id,
+    google_monitoring_notification_channel.backup_dr_gchat_channel.id
   ]
 
   documentation {
@@ -153,6 +170,7 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
   }
 
   depends_on = [
-    google_monitoring_notification_channel.backup_dr_failure_email_channel
+    google_monitoring_notification_channel.backup_dr_failure_email_channel,
+    google_monitoring_notification_channel.backup_dr_gchat_channel
   ]
 }
