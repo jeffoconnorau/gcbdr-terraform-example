@@ -37,7 +37,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_01_plan_associati
   backup_plan_association_id = "lax-linux-01-basic-plan-assoc"
   resource = data.google_compute_instance.lax_linux_01.self_link # The resource to associate
   #plan     = "projects/glabco-bdr-1/locations/us-west2/backupPlans/basic-vm-backup-plan-us-1"
-  backup_plan  = google_backup_dr_backup_plan.basic-vm-backup-plan-us-1.name
+  backup_plan  = google_backup_dr_backup_plan.us-vm-backup-plan-1.name
 }
 
 resource "google_backup_dr_backup_plan_association" "lax_linux_02_plan_association" {
@@ -49,5 +49,5 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_02_plan_associati
   backup_plan_association_id = "lax-linux-01-basic-plan-assoc"
   resource = data.google_compute_instance.lax_linux_02.self_link # The resource to associate
   #plan     = "projects/glabco-bdr-1/locations/us-west2/backupPlans/basic-vm-backup-plan-us-1"
-  backup_plan  = google_backup_dr_backup_plan.basic-vm-backup-plan-us-1.name
+  backup_plan  = google_backup_dr_backup_plan.us-vm-backup-plan-1.name
 }
