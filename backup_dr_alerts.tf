@@ -112,3 +112,47 @@ resource "google_monitoring_alert_policy" "backup_dr_successful_restore_alert" {
     google_monitoring_notification_channel.backup_dr_failure_email_channel
   ]
 }
+
+resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
+  provider     = google.gcp_bdr
+  project      = "glabco-bdr-1"
+  display_name = "Backup DR Restore Job Failed"
+  combiner     = "OR"
+  severity     = "ERROR"
+
+  conditions {
+    display_name = "Log match: Failed Backup DR Restore Jobs"
+    condition_matched_log {
+      filter = "resource.type=\"backupdr.googleapis.com/BackupDRProject\" AND jsonPayload.jobCategory = \"RESTORE\" AND jsonPayload.jobStatus = \"FAILED\""
+      # Optional: Add label extractors if needed
+      # label_extractors = {
+      #   "job_id" = "EXTRACT(jsonPayload.jobId)"
+      # }
+    }
+  }
+
+  alert_strategy {
+    auto_close = "172800s"
+    notification_rate_limit {
+      period = "1800s"
+    }
+  }
+
+  notification_channels = [
+    google_monitoring_notification_channel.backup_dr_failure_email_channel.id
+  ]
+
+  documentation {
+    content = "A Backup and DR restore job has FAILED in project glabco-bdr-1. Immediate attention may be required."
+    mime_type = "text/markdown"
+  }
+
+  user_labels = {
+    "service" = "backup-dr",
+    "type"    = "job-restore-failure-alert"
+  }
+
+  depends_on = [
+    google_monitoring_notification_channel.backup_dr_failure_email_channel
+  ]
+}
