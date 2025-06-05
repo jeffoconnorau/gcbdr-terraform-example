@@ -58,5 +58,5 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_02_plan_associati
   backup_plan_association_id = "lax-linux-01-basic-plan-assoc"
   resource = data.google_compute_instance.lax_linux_02.self_link # The resource to associate
   #plan     = "projects/glabco-bdr-1/locations/us-west2/backupPlans/basic-vm-backup-plan-us-1"
-  backup_plan_association_id = "lax-linux-02-basic-plan-assoc"
+  backup_plan  = google_backup_dr_backup_plan.basic-vm-backup-plan-us-1.name
 }
