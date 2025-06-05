@@ -31,7 +31,6 @@ resource "google_compute_instance" "lax-linux-01" {
 
   labels = {
     goog-ec-src           = "vm_add-tf"
-    goog-ops-agent-policy = "v2-x86-template-1-4-0"
   }
 
   machine_type = "e2-small"
@@ -111,7 +110,6 @@ resource "google_compute_instance" "lax-linux-02" {
 
   labels = {
     goog-ec-src           = "vm_add-tf"
-    goog-ops-agent-policy = "v2-x86-template-1-4-0"
   }
 
   machine_type = "e2-small"
@@ -191,7 +189,6 @@ resource "google_compute_instance" "lax-linux-03" {
 
   labels = {
     goog-ec-src           = "vm_add-tf"
-    goog-ops-agent-policy = "v2-x86-template-1-4-0"
   }
 
   machine_type = "e2-small"
@@ -271,7 +268,6 @@ resource "google_compute_instance" "lax-linux-04" {
 
   labels = {
     goog-ec-src           = "vm_add-tf"
-    goog-ops-agent-policy = "v2-x86-template-1-4-0"
   }
 
   machine_type = "e2-small"
@@ -322,25 +318,6 @@ resource "null_resource" "stop_lax_linux_04" {
 
   provisioner "local-exec" {
     command = "gcloud compute instances stop lax-linux-04 --zone=us-west2-c || true"
-  }
-}
-
-module "ops_agent_policy" {
-  source          = "github.com/terraform-google-modules/terraform-google-cloud-operations/modules/ops-agent-policy"
-  project         = "glabco-sp-1"
-  zone            = "us-west2-c"
-  assignment_id   = "goog-ops-agent-v2-x86-template-1-4-0-us-west2-c"
-  agents_rule = {
-    package_state = "installed"
-    version = "latest"
-  }
-  instance_filter = {
-    all = false
-    inclusion_labels = [{
-      labels = {
-        goog-ops-agent-policy = "v2-x86-template-1-4-0"
-      }
-    }]
   }
 }
 
