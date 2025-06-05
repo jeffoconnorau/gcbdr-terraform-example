@@ -2,10 +2,10 @@
 # For information about validating this Terraform code, see https://developer.hashicorp.com/terraform/tutorials/gcp-get-started/google-cloud-platform-build#format-and-validate-the-configuration
 
 resource "google_compute_instance" "lax-linux-01" {
-  attached_disk {
-    device_name = "lax-linux-01-data-1"
-    mode        = "READ_WRITE"
-  }
+#  attached_disk {
+#    device_name = "lax-linux-01-data-1"
+#    mode        = "READ_WRITE"
+#  }
 
   boot_disk {
     auto_delete = true
