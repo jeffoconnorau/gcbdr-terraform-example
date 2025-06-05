@@ -161,7 +161,7 @@ resource "google_backup_dr_backup_plan" "us-vm-backup-plan-1" {
 resource "google_backup_dr_backup_plan" "us-disks-backup-plan-1" {
   location       = "us-west2"
   backup_plan_id = "basic-backup-plan-us-1"
-  resource_type  = "compute.googleapis.com/Disk"
+  resource_type  = "compute.googleapis.com/Disks"
   backup_vault   = google_backup_dr_backup_vault.backup-vault-us-1.id
   description    = "Terraform created Backup Plan for Basic Disks running in us-west2"
 
