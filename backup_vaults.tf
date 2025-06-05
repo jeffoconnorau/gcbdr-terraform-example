@@ -45,6 +45,19 @@ resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
 #  effective_time = "2025-05-21T00:00:00Z" # Time to lock the bucket in yyyy-mm-ddThh:mm:ssZ # this is an ISO 8601 time format, where Z symbolises UTC (Zulu) timezone.
 }
 
+resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
+  location                                   = "us"
+  backup_vault_id                            = "bv-us-1"
+  description                                = "This is a multi-region backup vault built by Terraform"
+  backup_minimum_enforced_retention_duration = "86400s"
+  force_update = "true"
+  access_restriction = "WITHIN_ORGANIZATION" #Possible options are: ACCESS_RESTRICTION_UNSPECIFIED, WITHIN_PROJECT, WITHIN_ORGANIZATION, UNRESTRICTED, WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA
+  ignore_inactive_datasources = "true"
+  ignore_backup_plan_references = "true"
+  allow_missing = "true"
+#  effective_time = "2025-05-21T00:00:00Z" # Time to lock the bucket in yyyy-mm-ddThh:mm:ssZ # this is an ISO 8601 time format, where Z symbolises UTC (Zulu) timezone.
+}
+
 #Now for Backup Vault to protect VMs in a different project - add backup vault service agent to that project.
 resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
   project = "glabco-sp-1"
