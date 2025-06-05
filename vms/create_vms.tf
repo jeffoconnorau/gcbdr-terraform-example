@@ -2,7 +2,7 @@
 # For information about validating this Terraform code, see https://developer.hashicorp.com/terraform/tutorials/gcp-get-started/google-cloud-platform-build#format-and-validate-the-configuration
 
 provider "google" {
-  project = "glabco-bdr-1"
+  project = "glabco-sp-1"
 }
 
 resource "google_compute_instance" "lax-linux-01" {
