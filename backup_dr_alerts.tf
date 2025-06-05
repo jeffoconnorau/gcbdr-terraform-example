@@ -1,11 +1,5 @@
 # This file is for configuring alerts related to Google Cloud Backup and DR.
 
-provider "google" {
-  project = "glabco-bdr-1"
-  # Assuming the region might be needed for some monitoring resources,
-  # let's add a common one. This can be adjusted if specific resources need otherwise.
-  # region  = "us-west1"
-}
 
 # Resources for logging metric, alert policy, and notification channel will be added here.
 resource "google_logging_metric" "backup_dr_failed_jobs_metric" {
