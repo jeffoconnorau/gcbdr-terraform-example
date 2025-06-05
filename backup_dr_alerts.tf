@@ -27,7 +27,7 @@ resource "google_monitoring_notification_channel" "backup_dr_gchat_channel" {
   provider     = google.gcp_bdr
   project      = "glabco-bdr-1"
   display_name = "Backup DR Google Chat Space"
-  type         = "google_chat" This file is for configuring alerts related to Google Cloud Backup and DR.
+  type         = "chat" This file is for configuring alerts related to Google Cloud Backup and DR.
 
 # Provider for Backup & DR resources in the glabco-bdr-1 project
 provider "google" {
