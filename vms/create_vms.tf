@@ -320,3 +320,4 @@ resource "null_resource" "stop_lax_linux_04" {
     command = "gcloud compute instances stop lax-linux-04 --zone=us-west2-c || true"
   }
 }
+
