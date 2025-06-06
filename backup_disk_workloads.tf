@@ -6,7 +6,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_associati
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
   location = "us-west2"
-  resource = google_compute_instance.lax-linux-03.boot_disk[0].self_link
+  resource = google_compute_instance.lax-linux-03.self_link
   #resource = google_compute_disk.lax-linux-03.boot_disk[0].device_name
   #resource = google_compute_instance.lax-linux-03.name
   #resource = data.google_compute_disk.lax-linux-03.id
