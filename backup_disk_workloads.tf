@@ -13,6 +13,12 @@ data "google_compute_disk" "lax_linux_03" {
   zone     = "us-west2-c"       # Zone of the lax-linux-01 VM
 }
 
+data "google_compute_disk" "lax_linux_04" {
+  provider = google.gcp_disk # Use the provider for the project where the Disk exists
+  name     = "lax-linux-04"
+  zone     = "us-west2-c"       # Zone of the lax-linux-01 VM
+}
+
 # Backup and DR Workload definitions will be added here.
 resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_association" {
   provider = google.gcp_bdr
@@ -43,18 +49,17 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_03-d1_plan_associ
   ]
 }
 
-#resource "google_backup_dr_backup_plan_association" "lax_linux_04_plan_association" {
-#  provider = google.gcp_bdr
-#  project  = "glabco-sp-1"
-#  location = "us-west2"
-#  resource = google_compute_instance.lax-linux-04.boot_disk[0].source
-#  #resource = google_compute_instance.lax-linux-04.id
-#  backup_plan_association_id          = "lax-linux-04-disk-plan-assoc"
-#  resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
-#  depends_on = [
-#    google_compute_instance.lax-linux-04
-#  ]
-# }
+resource "google_backup_dr_backup_plan_association" "lax_linux_04_plan_association" {
+  provider = google.gcp_bdr
+  project  = "glabco-sp-1"
+  location = "us-west2"
+  resource = data.google_compute_disk.lax_linux_04.id
+  backup_plan_association_id          = "lax-linux-04-disk-plan-assoc"
+  resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
+  depends_on = [
+    google_compute_instance.lax-linux-04
+  ]
+ }
 
 resource "google_backup_dr_backup_plan_association" "lax_linux_04-d1_plan_association" {
   provider = google.gcp_bdr
