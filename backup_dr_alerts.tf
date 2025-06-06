@@ -1,11 +1,4 @@
 # This file is for configuring alerts related to Google Cloud Backup and DR.
-# Provider for Backup & DR resources in the glabco-bdr-1 project
-provider "google" {
-  alias   = "gcp_bdr"
-  project = "glabco-bdr-1"
-  # region  = "us-west1" # Optional: specify if needed
-}
-
 # Resources for logging metric, alert policy, and notification channel will be added here.
 resource "google_monitoring_notification_channel" "backup_dr_failure_email_channel" {
   provider     = google.gcp_bdr
