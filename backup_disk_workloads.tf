@@ -15,30 +15,40 @@ data "google_compute_disk" "lax_linux_03" {
   zone     = "us-west2-c"       # Zone of the lax-linux-01 VM
 }
 
+data "google_compute_disk" "lax_linux_03-d1" {
+  provider = google.gcp_disk # Use the provider for the project where the Disk exists
+  name     = "lax-linux-03-disk-1"
+  zone     = "us-west2-c"       # Zone of the lax-linux-01 VM
+}
+
 data "google_compute_disk" "lax_linux_04" {
   provider = google.gcp_disk # Use the provider for the project where the Disk exists
   name     = "lax-linux-04"
   zone     = "us-west2-c"       # Zone of the lax-linux-02 VM
 }
 
-#Example for Disk
-#resource "google_backup_dr_backup_plan_association" "bpa_1" {
-#  backup_plan_association_id = "bpa-1"
-#  project               = "vshreyansh-test-project-6"
-#  location              = "us-central1"
-#  backup_plan           = google_backup_dr_backup_plan.bp_disk_demo.id
-#  resource              = "//compute.googleapis.com/projects/vshreyansh-test-project-6/zones/us-central1-a/disks/test-disk" #data.google_compute_region_disk.my_regional_disk.id
-#  resource_type         = "compute.googleapis.com/Disk"
-#}
-
+data "google_compute_disk" "lax_linux_04-d1" {
+  provider = google.gcp_disk # Use the provider for the project where the Disk exists
+  name     = "lax-linux-04-disk-1"
+  zone     = "us-west2-c"       # Zone of the lax-linux-02 VM
+}
 
 resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_association" {
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
   location = "us-west2"
-  #resource = "//compute.googleapis.com/projects/glabco-sp-1/zones/us-west2-c/disks/lax-linux-03" # The resource to associate
   resource = data.google_compute_disk.lax_linux_03.id
   backup_plan_association_id          = "lax-linux-03-disk-plan-assoc"
+  backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
+  resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
+}
+
+resource "google_backup_dr_backup_plan_association" "lax_linux_03-d1_plan_association" {
+  provider = google.gcp_bdr
+  project  = "glabco-sp-1"
+  location = "us-west2"
+  resource = data.google_compute_disk.lax_linux_03-d1.id
+  backup_plan_association_id          = "lax-linux-03-disk-d1-plan-assoc"
   backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
   resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
 }
@@ -47,9 +57,18 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_04_plan_associati
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
   location = "us-west2"
-  #resource = "//compute.googleapis.com/projects/glabco-sp-1/zones/us-west2-c/disks/lax-linux-04" # The resource to associate
   resource = data.google_compute_disk.lax_linux_04.id
   backup_plan_association_id          = "lax-linux-04-disk-plan-assoc"
+  backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
+  resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
+}
+
+resource "google_backup_dr_backup_plan_association" "lax_linux_04-d1_plan_association" {
+  provider = google.gcp_bdr
+  project  = "glabco-sp-1"
+  location = "us-west2"
+  resource = data.google_compute_disk.lax_linux_04-d1.id
+  backup_plan_association_id          = "lax-linux-04-disk-d1-plan-assoc"
   backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
   resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
 }
