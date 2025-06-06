@@ -1,14 +1,9 @@
 # ------------------------------------------------------------------------------
 # Terraform Configuration for Google Cloud Backup and DR
 #
-# This configuration will:
-# 1. Enable the Backup and DR API.
-# 2. Create a Backup Vault.
+# 1. Create a Backup Vault.
+# 2. Configure Log Analytics setting for reporting
 #
-# IMPORTANT:
-# - VM Protection: This code sets up the Backup and DR infrastructure.
-#   Configuring backup policies and assigning VMs to backup plans is a
-#   separate step done via the GCP Console or gcloud commands.
 # ------------------------------------------------------------------------------
 
 terraform {
@@ -60,7 +55,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
 #  effective_time = "2025-05-21T00:00:00Z" # Time to lock the bucket in yyyy-mm-ddThh:mm:ssZ # this is an ISO 8601 time format, where Z symbolises UTC (Zulu) timezone.
 }
 
-#Now for Backup Vault to protect VMs in a different project - add backup vault service agent to that project.
+# Now for Backup Vault to protect VMs in a different project - add backup vault service agent to that project.
 resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
   project = "glabco-sp-1"
   role    = "roles/backupdr.computeEngineOperator" #or use roles/backupdr.diskOperator for Disk only protection
