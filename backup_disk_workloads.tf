@@ -10,13 +10,13 @@ provider "google" {
 
 # Backup and DR Workload definitions will be added here.
 data "google_compute_disk" "lax_linux_03" {
-  provider = google.gcp_disk # Use the provider for the project where the VM exists
+  provider = google.gcp_disk # Use the provider for the project where the Disk exists
   name     = "lax-linux-03"
   zone     = "us-west2-c"       # Zone of the lax-linux-01 VM
 }
 
 data "google_compute_disk" "lax_linux_04" {
-  provider = google.gcp_disk # Use the provider for the project where the VM exists
+  provider = google.gcp_disk # Use the provider for the project where the Disk exists
   name     = "lax-linux-04"
   zone     = "us-west2-c"       # Zone of the lax-linux-02 VM
 }
