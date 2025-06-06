@@ -1,4 +1,4 @@
-# Create Backup Plans for VMs with multiple Rules
+# Create Backup Plans for VMs and Disks with multiple Rules
 
 resource "google_backup_dr_backup_plan" "au-vm-backup-plan-1" {
   location       = "australia-southeast1"
