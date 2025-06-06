@@ -63,7 +63,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
 #Now for Backup Vault to protect VMs in a different project - add backup vault service agent to that project.
 resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
   project = "glabco-sp-1"
-  role    = "roles/backupdr.computeEngineOperator"
+  role    = "roles/backupdr.computeEngineOperator" #or use roles/backupdr.diskOperator for Disk only protection
   members = [
      "serviceAccount:${google_backup_dr_backup_vault.backup-vault-au-1.service_account}",
      "serviceAccount:${google_backup_dr_backup_vault.backup-vault-us-1.service_account}"
