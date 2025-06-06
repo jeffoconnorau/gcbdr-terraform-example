@@ -22,6 +22,7 @@ provider "google" {
 
 #create a region backup vault
 resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
+  provider                                   = google.gcp_bdr
   location                                   = "australia-southeast1"
   backup_vault_id                            = "bv-au-1"
   description                                = "This is a backup vault built by Terraform"
@@ -44,6 +45,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
 
 #create a multi-region backup vault
 resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
+  provider                                   = google.gcp_bdr
   location                                   = "us"
   backup_vault_id                            = "bv-us-mr-1"
   description                                = "This is a multi-region backup vault built by Terraform"
@@ -67,6 +69,7 @@ resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
 }
 # Enable Log Analytics in the project - to ensure logs can be used for reporting
 resource "google_logging_project_bucket_config" "analytics-enabled-bucket" {
+    provider         = google.gcp_bdr
     project          = "glabco-bdr-1"
     location         = "global"
     retention_days   = 300
