@@ -9,14 +9,14 @@ provider "google" {
 }
 
 # Backup and DR Workload definitions will be added here.
-data "google_compute_instance" "lax_linux_03" {
-  provider = google.gcp_compute # Use the provider for the project where the VM exists
+data "google_compute_disk" "lax_linux_03" {
+  provider = google.gcp_disk # Use the provider for the project where the VM exists
   name     = "lax-linux-03"
   zone     = "us-west2-c"       # Zone of the lax-linux-01 VM
 }
 
-data "google_compute_instance" "lax_linux_04" {
-  provider = google.gcp_compute # Use the provider for the project where the VM exists
+data "google_compute_disk" "lax_linux_04" {
+  provider = google.gcp_disk # Use the provider for the project where the VM exists
   name     = "lax-linux-04"
   zone     = "us-west2-c"       # Zone of the lax-linux-02 VM
 }
@@ -27,7 +27,7 @@ data "google_compute_instance" "lax_linux_04" {
 #  project               = "vshreyansh-test-project-6"
 #  location              = "us-central1"
 #  backup_plan           = google_backup_dr_backup_plan.bp_disk_demo.id
-#  resource              = "//compute.googleapis.com/projects/vshreyansh-test-project-6/zones/us-central1-a/disks/test-disk"
+#  resource              = "//compute.googleapis.com/projects/vshreyansh-test-project-6/zones/us-central1-a/disks/test-disk" #data.google_compute_region_disk.my_regional_disk.id
 #  resource_type         = "compute.googleapis.com/Disk"
 #}
 
@@ -37,8 +37,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_associati
   project  = "glabco-sp-1"
   location = "us-west2"
   #resource = "//compute.googleapis.com/projects/glabco-sp-1/zones/us-west2-c/disks/lax-linux-03" # The resource to associate
-  resource = data.google_compute_instance.lax_linux_03.id
-
+  resource = data.google_compute_disk.lax_linux_03.id
   backup_plan_association_id          = "lax-linux-03-disk-plan-assoc"
   backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
   resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
@@ -49,7 +48,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_04_plan_associati
   project  = "glabco-sp-1"
   location = "us-west2"
   #resource = "//compute.googleapis.com/projects/glabco-sp-1/zones/us-west2-c/disks/lax-linux-04" # The resource to associate
-  resource = data.google_compute_instance.lax_linux_04.id
+  resource = data.google_compute_disk.lax_linux_04.id
   backup_plan_association_id          = "lax-linux-04-disk-plan-assoc"
   backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
   resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
