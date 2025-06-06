@@ -2,11 +2,11 @@
 # with backup plans.
 
 # Provider for the GCE instances in glabco-sp-1
-#provider "google" {
-#  alias   = "gcp_compute"
-#  project = "glabco-sp-1"
-#  region  = "us-west2" # VMs are in us-west2, so setting region for this provider
-#}
+provider "google" {
+  alias   = "gcp_compute"
+  project = "glabco-sp-1"
+  region  = "us-west2" # VMs are in us-west2, so setting region for this provider
+}
 
 # Provider for Backup & DR resources in the glabco-bdr-1 project
 #provider "google" {
