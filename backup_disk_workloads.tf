@@ -1,12 +1,24 @@
 # This file defines Backup and DR workload configurations to associate Disks
 # with backup plans.
 
+provider "google" {
+  alias   = "gcp_disk"
+  project = "glabco-sp-1"
+  region  = "us-west2" # VMs are in us-west2, so setting region for this provider
+}
+
+data "google_compute_disk" "lax_linux_03" {
+  provider = google.gcp_disk # Use the provider for the project where the Disk exists
+  name     = "lax-linux-03"
+  zone     = "us-west2-c"       # Zone of the lax-linux-01 VM
+}
+
 # Backup and DR Workload definitions will be added here.
 resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_association" {
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
   location = "us-west2"
-  resource = google_compute_instance.lax-linux-03.self_link
+  resource = data.google_compute_disk.lax_linux_03.id
   #resource = google_compute_disk.lax-linux-03.boot_disk[0].device_name
   #resource = google_compute_instance.lax-linux-03.name
   #resource = data.google_compute_disk.lax-linux-03.id
