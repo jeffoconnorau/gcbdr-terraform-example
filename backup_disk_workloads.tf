@@ -2,11 +2,11 @@
 # with backup plans.
 
 # Provider for the GCE instances in glabco-sp-1
-provider "google" {
-  alias   = "gcp_compute"
-  project = "glabco-sp-1"
-  region  = "us-west2" # VMs are in us-west2, so setting region for this provider
-}
+#provider "google" {
+#  alias   = "gcp_compute"
+#  project = "glabco-sp-1"
+#  region  = "us-west2" # VMs are in us-west2, so setting region for this provider
+#}
 
 # Backup and DR Workload definitions will be added here.
 data "google_compute_instance" "lax_linux_03" {
