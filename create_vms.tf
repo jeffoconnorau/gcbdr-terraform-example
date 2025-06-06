@@ -1,8 +1,16 @@
 # This code is compatible with Terraform 4.25.0 and versions that are backward compatible to 4.25.0.
 # For information about validating this Terraform code, see https://developer.hashicorp.com/terraform/tutorials/gcp-get-started/google-cloud-platform-build#format-and-validate-the-configuration
 
+provider "google" {
+  alias   = "gcp_compute"
+  project = "glabco-sp-1"
+  # You might need to specify the region if not all resources in this file use the same one,
+  # or if the default region for the provider isn't us-west2.
+  # For now, we assume zone is specified in each resource, or region is inherited correctly.
+}
 
 resource "google_compute_instance" "lax-linux-01" {
+  provider = google.gcp_compute
   attached_disk {
     source      = google_compute_disk.lax_linux_01_disk_1.name
     device_name = "lax-linux-01-data-disk"
@@ -67,6 +75,7 @@ resource "google_compute_instance" "lax-linux-01" {
 }
 
 resource "google_compute_disk" "lax_linux_01_disk_1" {
+  provider = google.gcp_compute
   name  = "lax-linux-01-disk-1"
   type  = "pd-standard"
   size  = 10
@@ -82,6 +91,7 @@ resource "null_resource" "stop_lax_linux_01" {
 }
 
 resource "google_compute_instance" "lax-linux-02" {
+  provider = google.gcp_compute
   attached_disk {
     source      = google_compute_disk.lax_linux_02_disk_1.name
     device_name = "lax-linux-02-data-disk"
@@ -146,6 +156,7 @@ resource "google_compute_instance" "lax-linux-02" {
 }
 
 resource "google_compute_disk" "lax_linux_02_disk_1" {
+  provider = google.gcp_compute
   name  = "lax-linux-02-disk-1"
   type  = "pd-standard"
   size  = 10
@@ -161,6 +172,7 @@ resource "null_resource" "stop_lax_linux_02" {
 }
 
 resource "google_compute_instance" "lax-linux-03" {
+  provider = google.gcp_compute
   attached_disk {
     source      = google_compute_disk.lax_linux_03_disk_1.name
     device_name = "lax-linux-03-data-disk"
@@ -225,6 +237,7 @@ resource "google_compute_instance" "lax-linux-03" {
 }
 
 resource "google_compute_disk" "lax_linux_03_disk_1" {
+  provider = google.gcp_compute
   name  = "lax-linux-03-disk-1"
   type  = "pd-standard"
   size  = 10
@@ -240,6 +253,7 @@ resource "null_resource" "stop_lax_linux_03" {
 }
 
 resource "google_compute_instance" "lax-linux-04" {
+  provider = google.gcp_compute
   attached_disk {
     source      = google_compute_disk.lax_linux_04_disk_1.name
     device_name = "lax-linux-04-data-disk"
@@ -304,6 +318,7 @@ resource "google_compute_instance" "lax-linux-04" {
 }
 
 resource "google_compute_disk" "lax_linux_04_disk_1" {
+  provider = google.gcp_compute
   name  = "lax-linux-04-disk-1"
   type  = "pd-standard"
   size  = 10
