@@ -12,7 +12,6 @@ resource "google_monitoring_notification_channel" "backup_dr_failure_email_chann
   project      = "glabco-bdr-1"
   display_name = "Backup DR Job Failure Email (jeff@glabco.com)"
   type         = "email"
-
   labels = {
     email_address = "jeff@glabco.com"
   }
