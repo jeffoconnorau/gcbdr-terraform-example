@@ -8,47 +8,35 @@ provider "google" {
   region  = "us-west2" # VMs are in us-west2, so setting region for this provider
 }
 
-# Provider for Backup & DR resources in the glabco-bdr-1 project
-#provider "google" {
-#  alias   = "gcp_bdr"
-#  project = "glabco-bdr-1"
-#  region  = "us-west2" # Backup plan and workload config will be in us-west2
-#}
-
 # Backup and DR Workload definitions will be added here.
-data "google_compute_instance" "lax_linux_01" {
+data "google_compute_instance" "lax_linux_03" {
   provider = google.gcp_compute # Use the provider for the project where the VM exists
-  name     = "lax-linux-01"
+  name     = "lax-linux-03"
   zone     = "us-west2-c"       # Zone of the lax-linux-01 VM
 }
 
-data "google_compute_instance" "lax_linux_02" {
+data "google_compute_instance" "lax_linux_04" {
   provider = google.gcp_compute # Use the provider for the project where the VM exists
-  name     = "lax-linux-02"
+  name     = "lax-linux-04"
   zone     = "us-west2-c"       # Zone of the lax-linux-02 VM
 }
 
-resource "google_backup_dr_backup_plan_association" "lax_linux_01_plan_association" {
+resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_association" {
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
   location = "us-west2"
-  #name     = "lax-linux-01-basic-plan-assoc" # Name for the association resource
-  resource = data.google_compute_instance.lax_linux_01.id # The resource to associate
-  backup_plan_association_id          = "lax-linux-01-basic-plan-assoc"
+  resource = data.google_compute_instance.lax_linux_03.id # The resource to associate
+  backup_plan_association_id          = "lax-linux-03-basic-plan-assoc"
   backup_plan = google_backup_dr_backup_plan.us-vm-backup-plan-1.id
-  #backup_plan = "projects/glabco-bdr-1/locations/us-west2/backupPlans/basic-vm-backup-plan-us-1"
-  #resource = data.google_compute_instance.lax_linux_01.self_link # The resource to associate
   resource_type= "compute.googleapis.com/Instance"
 }
 
-resource "google_backup_dr_backup_plan_association" "lax_linux_02_plan_association" {
+resource "google_backup_dr_backup_plan_association" "lax_linux_04_plan_association" {
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
   location = "us-west2"
-  #name     = "lax-linux-02-basic-plan-assoc" # Name for the association resource
-  resource = data.google_compute_instance.lax_linux_02.id # The resource to associate
-  backup_plan_association_id          = "lax-linux-02-basic-plan-assoc"
-  backup_plan = google_backup_dr_backup_plan.us-vm-backup-plan-1.id
-  #plan     = google_backup_dr_backup_plan.us-vm-backup-plan-1.id
+  resource = data.google_compute_instance.lax_linux_04.id # The resource to associate
+  backup_plan_association_id          = "lax-linux-04-basic-plan-assoc"
+  backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
   resource_type= "compute.googleapis.com/Instance"
 }
