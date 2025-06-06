@@ -1,6 +1,7 @@
 # Create Backup Plans for VMs and Disks with multiple Rules
 
 resource "google_backup_dr_backup_plan" "au-vm-backup-plan-1" {
+  provider       = google.gcp_bdr
   location       = "australia-southeast1"
   backup_plan_id = "gold-vm-backup-plan-au-1"
   resource_type  = "compute.googleapis.com/Instance"
@@ -70,6 +71,7 @@ resource "google_backup_dr_backup_plan" "au-vm-backup-plan-1" {
 }
 
 resource "google_backup_dr_backup_plan" "au-vm-backup-plan-2" {
+  provider       = google.gcp_bdr
   location       = "australia-southeast1"
   backup_plan_id = "silver-vm-backup-plan-au-2"
   resource_type  = "compute.googleapis.com/Instance"
@@ -109,6 +111,7 @@ resource "google_backup_dr_backup_plan" "au-vm-backup-plan-2" {
 }
 
 resource "google_backup_dr_backup_plan" "au-vm-backup-plan-3" {
+  provider       = google.gcp_bdr
   location       = "australia-southeast1"
   backup_plan_id = "bronze-vm-backup-plan-au-3"
   resource_type  = "compute.googleapis.com/Instance"
@@ -133,6 +136,7 @@ resource "google_backup_dr_backup_plan" "au-vm-backup-plan-3" {
 }
 
 resource "google_backup_dr_backup_plan" "us-vm-backup-plan-1" {
+  provider       = google.gcp_bdr
   location       = "us-west2"
   backup_plan_id = "basic-vm-backup-plan-us-1"
   resource_type  = "compute.googleapis.com/Instance"
@@ -159,6 +163,7 @@ resource "google_backup_dr_backup_plan" "us-vm-backup-plan-1" {
 # Create Backup Plans for Disk with multiple Rules
 
 resource "google_backup_dr_backup_plan" "us-disk-backup-plan-1" {
+  provider       = google.gcp_bdr
   location       = "us-west2"
   backup_plan_id = "basic-disks-backup-plan-us-1"
   resource_type  = "compute.googleapis.com/Disk"

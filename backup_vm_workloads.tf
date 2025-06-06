@@ -1,13 +1,6 @@
 # This file defines Backup and DR workload configurations to associate VMs
 # with backup plans.
 
-# Provider for the GCE instances in glabco-sp-1
-provider "google" {
-  alias   = "gcp_compute"
-  project = "glabco-sp-1"
-  region  = "us-west2" # VMs are in us-west2, so setting region for this provider
-}
-
 # Backup and DR Workload definitions will be added here.
 resource "google_backup_dr_backup_plan_association" "lax_linux_01_plan_association" {
   provider = google.gcp_bdr

@@ -16,6 +16,7 @@ terraform {
 }
 
 provider "google" {
+  alias   = "gcp_bdr"
   project = "glabco-bdr-1"
 }
 
