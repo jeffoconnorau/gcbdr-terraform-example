@@ -19,7 +19,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_03-d1_plan_associ
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
   location = "us-west2"
-  resource = google_compute_disk.lax_linux_03_disk_1.self_link
+  resource = google_compute_disk.lax_linux_03_disk_1.id
   backup_plan_association_id          = "lax-linux-03-disk-d1-plan-assoc"
   backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
   resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
@@ -45,7 +45,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_04-d1_plan_associ
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
   location = "us-west2"
-  resource = google_compute_disk.lax_linux_04_disk_1.self_link
+  resource = google_compute_disk.lax_linux_04_disk_1.id
   backup_plan_association_id          = "lax-linux-04-disk-d1-plan-assoc"
   backup_plan = google_backup_dr_backup_plan.us-disk-backup-plan-1.id
   resource_type= "compute.googleapis.com/Disk" # for Regional Disk use /RegionDisk instead of /Disk
