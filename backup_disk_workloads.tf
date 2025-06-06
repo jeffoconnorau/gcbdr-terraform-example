@@ -31,9 +31,9 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_associati
   project  = "glabco-sp-1"
   location = "us-west2"
   #below is working  
-  #resource = data.google_compute_disk.lax_linux_03.id
-  #below is not
-  resource = google_compute_disk.lax-linux-03.boot_disk[0].source
+  resource = data.google_compute_disk.lax_linux_03.id
+  #below is not whether we use google_compute_disk or google_compute
+  #resource = google_compute_disk.lax-linux-03.boot_disk[0].source
   #resource = google_compute_disk.lax-linux-03.boot_disk[0].device_name
   #resource = google_compute_instance.lax-linux-03.boot_disk[0].id
   #resource = data.google_compute_disk.lax-linux-03.id
