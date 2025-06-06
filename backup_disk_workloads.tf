@@ -1,4 +1,4 @@
-# This file defines Backup and DR workload configurations to associate VMs
+# This file defines Backup and DR workload configurations to associate Disks
 # with backup plans.
 
 # Provider for the GCE instances in glabco-sp-1
