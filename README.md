@@ -58,6 +58,8 @@ This example uses hardcoded project IDs for simplicity:
 
 If you wish to use different project IDs, you will need to update the `project` attributes in the provider blocks (in `create_vms.tf` and `backup_vaults.tf`) and potentially in resource definitions that explicitly set the project.
 
+It is also recommended to update the Cloud Alerts notification channels to email addresses and or chat spaces that you are associated with.
+
 ## Deployment
 
 1.  **Initialize Terraform**:
