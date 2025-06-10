@@ -3,14 +3,12 @@
 resource "google_monitoring_notification_channel" "backup_dr_failure_email_channel" {
   provider     = google.gcp_bdr
   project      = "glabco-bdr-1"
-  display_name = "Backup DR Job Failure Email (jeff@glabco.com)"
+  display_name = "Backup DR Job Failure Email Address"
   type         = "email"
   labels = {
     email_address = "jeff@glabco.com"
   }
-
-  description = "Email notification channel for Backup and DR job failures, sending to jeff@glabco.com."
-
+  description = "Email notification channel for Backup and DR job failures, sending to jeff@glabco.com"
   # enabled = true # This is true by default
 }
 
