@@ -190,7 +190,7 @@ resource "google_monitoring_alert_policy" "backup_dr_expiration_event_alert" {
   project      = "glabco-bdr-1"
   display_name = "Backup DR Manual Expiration Event"
   combiner     = "OR"
-  severity     = "NOTICE"
+  severity     = "WARNING"
 
   conditions {
     display_name = "Log match: Backup DR Manual Expiration Event"
