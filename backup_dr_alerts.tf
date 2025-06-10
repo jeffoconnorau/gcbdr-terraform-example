@@ -91,10 +91,16 @@ resource "google_monitoring_alert_policy" "backup_dr_successful_restore_alert" {
     display_name = "Log match: Successful Backup DR Restore Jobs"
     condition_matched_log {
       filter = "resource.type=\"backupdr.googleapis.com/BackupDRProject\" AND jsonPayload.jobCategory = \"RESTORE\" AND jsonPayload.jobStatus = \"SUCCESSFUL\""
-      # Optional: Add label extractors if needed
-      # label_extractors = {
-      #   "job_id" = "EXTRACT(jsonPayload.jobId)"
-      # }
+       label_extractors = {
+         "backupVaultName" = "EXTRACT(jsonPayload.backupVaultName)",
+         "ResourceType" = "EXTRACT(jsonPayload.ResourceType)",
+         "sourceResourceName" = "EXTRACT(jsonPayload.sourceResourceName)",
+         "sourceResourceLocation" = "EXTRACT(jsonPayload.sourceResourceLocation)",
+         "restoreResourceName" = "EXTRACT(jsonPayload.restoreResourceName)",
+         "restoreResourceLocation" = "EXTRACT(jsonPayload.restoreResourceLocation)",
+         "jobStatus" = "EXTRACT(jsonPayload.jobStatus)",
+         "jobCategory" = "EXTRACT(jsonPayload.jobCategory)"
+       }
     }
   }
 
@@ -138,9 +144,16 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
     condition_matched_log {
       filter = "resource.type=\"backupdr.googleapis.com/BackupDRProject\" AND jsonPayload.jobCategory = \"RESTORE\" AND jsonPayload.jobStatus = \"FAILED\""
       # Optional: Add label extractors if needed
-      # label_extractors = {
-      #   "job_id" = "EXTRACT(jsonPayload.jobId)"
-      # }
+       label_extractors = {
+         "backupVaultName" = "EXTRACT(jsonPayload.backupVaultName)",
+         "ResourceType" = "EXTRACT(jsonPayload.ResourceType)",
+         "sourceResourceName" = "EXTRACT(jsonPayload.sourceResourceName)",
+         "sourceResourceLocation" = "EXTRACT(jsonPayload.sourceResourceLocation)",
+         "restoreResourceName" = "EXTRACT(jsonPayload.restoreResourceName)",
+         "restoreResourceLocation" = "EXTRACT(jsonPayload.restoreResourceLocation)",
+         "jobStatus" = "EXTRACT(jsonPayload.jobStatus)",
+         "jobCategory" = "EXTRACT(jsonPayload.jobCategory)"
+       }
     }
   }
 
