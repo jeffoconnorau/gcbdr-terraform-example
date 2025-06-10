@@ -185,17 +185,17 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
   ]
 }
 
-resource "google_monitoring_alert_policy" "backup_dr_failed_expiry_alert" {
+resource "google_monitoring_alert_policy" "backup_dr_expiration_event_alert" {
   provider     = google.gcp_bdr
   project      = "glabco-bdr-1"
-  display_name = "Backup DR Expiry Attempt Failed"
+  display_name = "Backup DR Manual Expiration Event"
   combiner     = "OR"
-  severity     = "ERROR"
+  severity     = "NOTICE"
 
   conditions {
-    display_name = "Log match: Backup DR Expiry Attempt Failed"
+    display_name = "Log match: Backup DR Manual Expiration Event"
     condition_matched_log {
-      filter = "protoPayload.methodName = \"google.cloud.backupdr.v1.BackupDR.DeleteBackup\" AND protoPayload.status.code = \"9\""
+      filter = "protoPayload.methodName = \"google.cloud.backupdr.v1.BackupDR.DeleteBackup\""
 
       # Optional: Add label extractors if needed
        label_extractors = {
@@ -203,6 +203,7 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_expiry_alert" {
          "currentLocations" = "EXTRACT(protoPayload.resourceLocation.currentLocations)",
          "resourceName" = "EXTRACT(protoPayload.resourceName)",
          "methodName" = "EXTRACT(protoPayload.methodName)",
+         "project_id" = "EXTRACT(resource.labels.project_id)",
          "severity" = "EXTRACT(protoPayload.severity)"
        }
     }
