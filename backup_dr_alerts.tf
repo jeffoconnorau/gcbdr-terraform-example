@@ -184,3 +184,53 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
     google_monitoring_notification_channel.backup_dr_gchat_channel
   ]
 }
+
+resource "google_monitoring_alert_policy" "backup_dr_failed_expiry_alert" {
+  provider     = google.gcp_bdr
+  project      = "glabco-bdr-1"
+  display_name = "Backup DR Expiry Attempt Failed"
+  combiner     = "OR"
+  severity     = "ERROR"
+
+  conditions {
+    display_name = "Log match: Backup DR Expiry Attempt Failed"
+    condition_matched_log {
+      filter = "protoPayload.methodName = \"google.cloud.backupdr.v1.BackupDR.DeleteBackup\" AND protoPayload.status.code = \"9\""
+
+      # Optional: Add label extractors if needed
+       label_extractors = {
+         "principalEmail" = "EXTRACT(protoPayload.authenticationInfo.principalEmail)",
+         "currentLocations" = "EXTRACT(protoPayload.resourceLocation.currentLocations)",
+         "resourceName" = "EXTRACT(protoPayload.resourceName)",
+         "severity" = "EXTRACT(protoPayload.severity)"
+       }
+    }
+  }
+
+  alert_strategy {
+    auto_close = "172800s" 
+    notification_rate_limit {
+      period = "1800s" 
+    }
+  }
+
+  notification_channels = [
+    google_monitoring_notification_channel.backup_dr_failure_email_channel.id,
+    google_monitoring_notification_channel.backup_dr_gchat_channel.id
+  ]
+
+  documentation {
+    content = "A Backup and DR restore job has FAILED in project glabco-bdr-1. Immediate attention may be required."
+    mime_type = "text/markdown"
+  }
+
+  user_labels = {
+    "service" = "backup-dr",
+    "type"    = "job-restore-failure-alert"
+  }
+
+  depends_on = [
+    google_monitoring_notification_channel.backup_dr_failure_email_channel,
+    google_monitoring_notification_channel.backup_dr_gchat_channel
+  ]
+}
