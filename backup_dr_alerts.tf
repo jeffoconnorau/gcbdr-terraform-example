@@ -202,6 +202,7 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_expiry_alert" {
          "principalEmail" = "EXTRACT(protoPayload.authenticationInfo.principalEmail)",
          "currentLocations" = "EXTRACT(protoPayload.resourceLocation.currentLocations)",
          "resourceName" = "EXTRACT(protoPayload.resourceName)",
+         "methodName" = "EXTRACT(protoPayload.methodName)",
          "severity" = "EXTRACT(protoPayload.severity)"
        }
     }
