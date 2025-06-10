@@ -39,9 +39,15 @@ resource "google_monitoring_alert_policy" "backup_dr_job_failure_alert" {
       filter = "resource.type=\"backupdr.googleapis.com/BackupDRProject\" AND jsonPayload.jobCategory = \"SCHEDULED_BACKUP\" AND jsonPayload.jobStatus = \"FAILED\""
       # Optional: Add label extractors if needed for the notification content,
       # similar to how they were in the logging_metric.
-      # label_extractors = {
-      #   "job_id" = "EXTRACT(jsonPayload.jobId)"
-      # }
+       label_extractors = {
+         "backupVaultName" = "EXTRACT(jsonPayload.backupVaultName)",
+         "backupPlanName" = "EXTRACT(jsonPayload.backupPlanName)",
+         "sourceResourceName" = "EXTRACT(jsonPayload.sourceResourceName)",
+         "sourceResourceLocation" = "EXTRACT(jsonPayload.sourceResourceLocation)",
+         "errorType" = "EXTRACT(jsonPayload.errorType)",
+         "jobStatus" = "EXTRACT(jsonPayload.jobStatus)",
+         "errorCode" = "EXTRACT(jsonPayload.errorCode)"
+       }
     }
   }
 
