@@ -10,7 +10,7 @@ if [ $# -lt 7 ]; then
   logvol     :  Log Volume mount point Ex: /opt/ibm/db2/log
   logbackup  :  Log Backup mount point Ex: /opt/ibm/db2/backup
   hostid     :  Target host ID from Management Console
-  disktype   :  Target Disk type (pd-ssd, pd-balanced, pd-standard, pd-extreme, etc)
+  disktype   :  Target Disk type (pd-ssd, pd-balanced, pd-standard, pd-extreme, hyperdisk-balanced, etc)
   wait_flag  :  Wait for the mount job completion (true/false)
   e.g # ./db2_mount_via_api.sh https://bmc-699999999995-pxxxxyyo-dot-asia-southeast1.backupdr.googleusercontent.com 1340102 /mnt/data /mnt/log /mnt/backup 1294549 pd-ssd true
 EOF
