@@ -47,7 +47,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
 resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
   provider                                   = google.gcp_bdr
   location                                   = "us"
-  backup_vault_id                            = "bv-us-mr-01"
+  backup_vault_id                            = "bv-us-mr-02"
   description                                = "This is a multi-region backup vault built by Terraform"
   backup_minimum_enforced_retention_duration = "259200s"
   force_update = "true"
