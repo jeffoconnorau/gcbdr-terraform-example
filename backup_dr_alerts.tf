@@ -6,7 +6,7 @@ resource "google_monitoring_notification_channel" "backup_dr_failure_email_chann
   display_name = "Backup DR Job Failure Email Address"
   type         = "email"
   labels = {
-    email_address = "jeff@glabco.com"
+    email_address = "example@email.com"
   }
   description = "Email notification channel for Backup and DR job failures, sending to jeff@glabco.com"
   # enabled = true # This is true by default
@@ -18,7 +18,7 @@ resource "google_monitoring_notification_channel" "backup_dr_gchat_channel" {
   display_name = "Backup & DR Job Alerts"
   type         = "google_chat"
   labels = {
-    space = "spaces/AAAAE4_y2WM"
+    space = "spaces/ABCDEFGH"
   }
   description  = "Google Chat notification channel for Backup and DR alerts."
   # enabled    = true # Default is true
