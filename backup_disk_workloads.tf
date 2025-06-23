@@ -3,7 +3,7 @@
 
 # Backup lax-linux-03 Boot Disk via Disk Protection
 resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_association" {
-  project  = "glabco-sp-1"
+  project  = "workload-project_id"
   location = "us-west2"
   resource = google_compute_instance.lax-linux-03.boot_disk[0].source
   backup_plan_association_id          = "lax-linux-03-disk-plan-assoc"
@@ -16,7 +16,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_03_plan_associati
 
 # Backup lax-linux-03 Data Disk via Disk Protection
 resource "google_backup_dr_backup_plan_association" "lax_linux_03-d1_plan_association" {
-  project  = "glabco-sp-1"
+  project  = "workload-project_id"
   location = "us-west2"
   resource = google_compute_disk.lax_linux_03_disk_1.id
   backup_plan_association_id          = "lax-linux-03-disk-d1-plan-assoc"
@@ -29,7 +29,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_03-d1_plan_associ
 
 # Backup lax-linux-04 Boot Disk via Disk Protection
 resource "google_backup_dr_backup_plan_association" "lax_linux_04_plan_association" {
-  project  = "glabco-sp-1"
+  project  = "workload-project_id"
   location = "us-west2"
   resource = google_compute_instance.lax-linux-04.boot_disk[0].source
   backup_plan_association_id          = "lax-linux-04-disk-plan-assoc"
@@ -42,7 +42,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_04_plan_associati
 
 # Backup lax-linux-04 Data Disk via Disk Protection
 resource "google_backup_dr_backup_plan_association" "lax_linux_04-d1_plan_association" {
-  project  = "glabco-sp-1"
+  project  = "workload-project_id"
   location = "us-west2"
   resource = google_compute_disk.lax_linux_04_disk_1.id
   backup_plan_association_id          = "lax-linux-04-disk-d1-plan-assoc"
