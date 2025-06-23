@@ -2,7 +2,7 @@
 # Resources for logging metric, alert policy, and notification channel will be added here.
 resource "google_monitoring_notification_channel" "backup_dr_failure_email_channel" {
   provider     = google.gcp_bdr
-  project      = "glabco-bdr-1"
+  project      = "backup-project_id"
   display_name = "Backup DR Job Failure Email Address"
   type         = "email"
   labels = {
@@ -14,7 +14,7 @@ resource "google_monitoring_notification_channel" "backup_dr_failure_email_chann
 
 resource "google_monitoring_notification_channel" "backup_dr_gchat_channel" {
   provider     = google.gcp_bdr
-  project      = "glabco-bdr-1"
+  project      = "backup-project_id"
   display_name = "Backup & DR Job Alerts"
   type         = "google_chat"
   labels = {
@@ -26,7 +26,7 @@ resource "google_monitoring_notification_channel" "backup_dr_gchat_channel" {
 
 resource "google_monitoring_alert_policy" "backup_dr_job_failure_alert" {
   provider     = google.gcp_bdr
-  project      = "glabco-bdr-1"
+  project      = "backup-project_id"
   display_name = "Backup DR Scheduled Backup Job Failed"
   combiner     = "OR"          # How to combine conditions (only one condition here, so OR/AND doesn't matter much)
   severity     = "WARNING"
@@ -80,7 +80,7 @@ resource "google_monitoring_alert_policy" "backup_dr_job_failure_alert" {
 
 resource "google_monitoring_alert_policy" "backup_dr_successful_restore_alert" {
   provider     = google.gcp_bdr
-  project      = "glabco-bdr-1"
+  project      = "backup-project_id"
   display_name = "Backup DR Restore Job Successful"
   combiner     = "OR"
   severity     = "WARNING" # Or consider "INFO" for success, but using WARNING as per original for now
@@ -115,7 +115,7 @@ resource "google_monitoring_alert_policy" "backup_dr_successful_restore_alert" {
   ]
 
   documentation {
-    content = "A Backup and DR restore job has completed successfully in project glabco-bdr-1."
+    content = "A Backup and DR restore job has completed successfully in project backup-project_id."
     mime_type = "text/markdown"
   }
 
@@ -132,7 +132,7 @@ resource "google_monitoring_alert_policy" "backup_dr_successful_restore_alert" {
 
 resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
   provider     = google.gcp_bdr
-  project      = "glabco-bdr-1"
+  project      = "backup-project_id"
   display_name = "Backup DR Restore Job Failed"
   combiner     = "OR"
   severity     = "ERROR"
@@ -168,7 +168,7 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
   ]
 
   documentation {
-    content = "A Backup and DR restore job has FAILED in project glabco-bdr-1. Immediate attention may be required."
+    content = "A Backup and DR restore job has FAILED in project backup-project_id. Immediate attention may be required."
     mime_type = "text/markdown"
   }
 
@@ -185,7 +185,7 @@ resource "google_monitoring_alert_policy" "backup_dr_failed_restore_alert" {
 
 resource "google_monitoring_alert_policy" "backup_dr_expiration_event_alert" {
   provider     = google.gcp_bdr
-  project      = "glabco-bdr-1"
+  project      = "backup-project_id"
   display_name = "Backup DR Manual Expiration Event"
   combiner     = "OR"
   severity     = "WARNING"
@@ -220,7 +220,7 @@ resource "google_monitoring_alert_policy" "backup_dr_expiration_event_alert" {
   ]
 
   documentation {
-    content = "A Backup and DR restore job has FAILED in project glabco-bdr-1. Immediate attention may be required."
+    content = "A Backup and DR restore job has FAILED in project backup-project_id. Immediate attention may be required."
     mime_type = "text/markdown"
   }
 
