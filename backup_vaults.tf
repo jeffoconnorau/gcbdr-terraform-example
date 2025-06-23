@@ -17,7 +17,7 @@ terraform {
 
 provider "google" {
   alias   = "gcp_bdr"
-  project = "glabco-bdr-1"
+  project = "backup-project_id"
 }
 
 #create a region backup vault with 1 day enforced retention
@@ -47,7 +47,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
 resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
   provider                                   = google.gcp_bdr
   location                                   = "us"
-  backup_vault_id                            = "bv-us-mr-02"
+  backup_vault_id                            = "bv-us-mr-01"
   description                                = "This is a multi-region backup vault built by Terraform"
   backup_minimum_enforced_retention_duration = "259200s"
   force_update = "true"
@@ -60,7 +60,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
 
 # Now for Backup Vault to protect VMs in a different project - add backup vault service agent to that project.
 resource "google_project_iam_binding" "svc-agent-added-to-infra-project" {
-  project = "glabco-sp-1"
+  project = "workload-project_id"
   role    = "roles/backupdr.computeEngineOperator" #or use roles/backupdr.diskOperator for Disk only protection
   members = [
      "serviceAccount:${google_backup_dr_backup_vault.backup-vault-au-1.service_account}",
@@ -71,7 +71,7 @@ resource "google_project_iam_binding" "svc-agent-added-to-infra-project" {
 # Enable Log Analytics in the project - to ensure logs can be used for reporting
 resource "google_logging_project_bucket_config" "analytics-enabled-bucket" {
     provider         = google.gcp_bdr
-    project          = "glabco-bdr-1"
+    project          = "backup-project_id"
     location         = "global"
     retention_days   = 300
     enable_analytics = true
