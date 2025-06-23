@@ -1,7 +1,7 @@
 # This file defines Backup and DR workload configurations to associate VMs
 # with backup plans.
 
-# Backup and DR Workload definitions will be added here.
+# Backup lax-linux-01 VM via Disk Protection
 resource "google_backup_dr_backup_plan_association" "lax_linux_01_plan_association" {
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
@@ -15,6 +15,7 @@ resource "google_backup_dr_backup_plan_association" "lax_linux_01_plan_associati
   ]
 }
 
+# Backup lax-linux-02 VM via Disk Protection
 resource "google_backup_dr_backup_plan_association" "lax_linux_02_plan_association" {
   provider = google.gcp_bdr
   project  = "glabco-sp-1"
