@@ -20,7 +20,7 @@ provider "google" {
   project = "glabco-bdr-1"
 }
 
-#create a region backup vault
+#create a region backup vault with 1 day enforced retention
 resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
   provider                                   = google.gcp_bdr
   location                                   = "australia-southeast1"
@@ -43,13 +43,13 @@ resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
 #  effective_time = "2025-05-21T00:00:00Z" # Time to lock the bucket in yyyy-mm-ddThh:mm:ssZ # this is an ISO 8601 time format, where Z symbolises UTC (Zulu) timezone.
 }
 
-#create a multi-region backup vault
+#create a multi-region backup vault with 3 days enforced retention
 resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
   provider                                   = google.gcp_bdr
   location                                   = "us"
-  backup_vault_id                            = "bv-us-mr-1"
+  backup_vault_id                            = "bv-us-mr-01"
   description                                = "This is a multi-region backup vault built by Terraform"
-  backup_minimum_enforced_retention_duration = "86400s"
+  backup_minimum_enforced_retention_duration = "259200s"
   force_update = "true"
   access_restriction = "WITHIN_ORGANIZATION" #Possible options are: ACCESS_RESTRICTION_UNSPECIFIED, WITHIN_PROJECT, WITHIN_ORGANIZATION, UNRESTRICTED, WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA
   ignore_inactive_datasources = "true"
