@@ -12,6 +12,7 @@ resource "google_monitoring_notification_channel" "backup_dr_failure_email_chann
   # enabled = true # This is true by default
 }
 
+# Use the spaces Id which is visible in the Chat space Page URL
 resource "google_monitoring_notification_channel" "backup_dr_gchat_channel" {
   provider     = google.gcp_bdr
   project      = "backup-project_id"
