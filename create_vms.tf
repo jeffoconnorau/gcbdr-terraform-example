@@ -3,7 +3,7 @@
 
 provider "google" {
   alias   = "gcp_compute"
-  project = "glabco-sp-1"
+  project = "workload-project_id"
   # You might need to specify the region if not all resources in this file use the same one,
   # or if the default region for the provider isn't us-west2.
   # For now, we assume zone is specified in each resource, or region is inherited correctly.
@@ -86,7 +86,7 @@ resource "null_resource" "stop_lax_linux_01" {
   depends_on = [google_compute_instance.lax-linux-01]
 
   provisioner "local-exec" {
-    command = "sleep 15 && gcloud compute instances stop lax-linux-01 --zone=us-west2-c --project=glabco-sp-1 || true"
+    command = "sleep 15 && gcloud compute instances stop lax-linux-01 --zone=us-west2-c --project=workload-project_id || true"
   }
 }
 
@@ -167,7 +167,7 @@ resource "null_resource" "stop_lax_linux_02" {
   depends_on = [google_compute_instance.lax-linux-02]
 
   provisioner "local-exec" {
-    command = "sleep 15 && gcloud compute instances stop lax-linux-02 --zone=us-west2-c --project=glabco-sp-1 || true"
+    command = "sleep 15 && gcloud compute instances stop lax-linux-02 --zone=us-west2-c --project=workload-project_id || true"
   }
 }
 
@@ -248,7 +248,7 @@ resource "null_resource" "stop_lax_linux_03" {
   depends_on = [google_compute_instance.lax-linux-03]
 
   provisioner "local-exec" {
-    command = "sleep 15 && gcloud compute instances stop lax-linux-03 --zone=us-west2-c --project=glabco-sp-1 || true"
+    command = "sleep 15 && gcloud compute instances stop lax-linux-03 --zone=us-west2-c --project=workload-project_id || true"
   }
 }
 
@@ -329,6 +329,6 @@ resource "null_resource" "stop_lax_linux_04" {
   depends_on = [google_compute_instance.lax-linux-04]
 
   provisioner "local-exec" {
-    command = "sleep 15 && gcloud compute instances stop lax-linux-04 --zone=us-west2-c --project=glabco-sp-1 || true"
+    command = "sleep 15 && gcloud compute instances stop lax-linux-04 --zone=us-west2-c --project=workload-project_id || true"
   }
 }
