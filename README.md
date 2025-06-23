@@ -90,7 +90,7 @@ This configuration will create the following main resources:
 - **In Workload Project (`glabco-sp-1`)**:
     - 4 `google_compute_instance` (lax-linux-01 to lax-linux-04)
     - 4 `google_compute_disk` (for attached data disks)
-    - `google_backup_dr_backup_plan_association` resources for each VM and disk.
+    - `google_backup_dr_backup_plan_association` resources for each VM (lax-linux-01 and lax-linux-02) and disk (lax-linux-03 and lax-linux-04).
     - IAM bindings for the Backup Vault service agent.
 - **In Backup & DR Project (`glabco-bdr-1`)**:
     - `google_backup_dr_backup_vault` resources.
