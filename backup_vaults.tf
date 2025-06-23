@@ -59,7 +59,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
 }
 
 # Now for Backup Vault to protect VMs in a different project - add backup vault service agent to that project.
-resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
+resource "google_project_iam_binding" "svc-agent-added-to-infra-project" {
   project = "glabco-sp-1"
   role    = "roles/backupdr.computeEngineOperator" #or use roles/backupdr.diskOperator for Disk only protection
   members = [
@@ -67,6 +67,7 @@ resource "google_project_iam_binding" "svc-account-added-to-infra-project" {
      "serviceAccount:${google_backup_dr_backup_vault.backup-vault-us-1.service_account}"
   ]
 }
+
 # Enable Log Analytics in the project - to ensure logs can be used for reporting
 resource "google_logging_project_bucket_config" "analytics-enabled-bucket" {
     provider         = google.gcp_bdr
