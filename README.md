@@ -30,6 +30,7 @@ Before applying this Terraform configuration, ensure you have the following:
 - **Google Cloud Projects**:
     - A workload project (hardcoded as `workload-project_id` in this example).
     - A dedicated Backup & DR admin project (hardcoded as `backup-project_id` in this example).
+    - Alternatively you could also create all of the resources in the same project, but normally it's better to keep these apart. i.e. backups are external to the project where workloads are.
     - Ensure these projects are created and you have necessary permissions (e.g., Owner, Editor, or sufficient custom roles) to create resources within them.
 - **APIs Enabled**: Ensure the following APIs are enabled in the respective projects:
     - In `workload-project_id` (Workload Project):
