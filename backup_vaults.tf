@@ -46,7 +46,7 @@ resource "google_backup_dr_backup_vault" "backup-vault-au-1" {
 #create a multi-region backup vault with 3 days enforced retention
 resource "google_backup_dr_backup_vault" "backup-vault-us-1" {
   provider                                   = google.gcp_bdr
-  location                                   = "us"
+  location                                   = var.us_location
   backup_vault_id                            = var.backup_vault_us_id
   description                                = "This is a multi-region backup vault built by Terraform"
   backup_minimum_enforced_retention_duration = "259200s"
