@@ -2,15 +2,15 @@
 vm_names = ["lax-linux-01", "lax-linux-02", "lax-linux-03", "lax-linux-04"]
 machine_type = "e2-small"
 zone = "us-west2-c"
-project_id = "project-where-vms-are-deployed"
-gcp_bdr_project_id = "project-where-backup-plans-are-deployed"
+project_id = "workload-project_id"
+gcp_bdr_project_id = "backup-project_id"
 boot_disk_image = "projects/debian-cloud/global/images/debian-12-bookworm-v20250513"
 boot_disk_size = 10
 boot_disk_type = "pd-balanced"
 data_disk_type = "pd-standard"
 data_disk_size = 10
 service_account_email = "000000000000-compute@developer.gserviceaccount.com"
-subnetwork = "projects/host-project/regions/us-west2/subnetworks/hp-1-sn-1"
+subnetwork = "projects/host-project_id/regions/us-west2/subnetworks/hp-1-sn-1"
 
 # Backup variables
 backup_location = "us-west2"
