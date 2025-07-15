@@ -95,6 +95,11 @@ variable "au_location" {
   type        = string
 }
 
+variable "us_location" {
+  description = "The location for the US resources"
+  type        = string
+}
+
 variable "au_vm_backup_plan_gold_id" {
   description = "The ID of the AU VM gold backup plan"
   type        = string
