@@ -49,7 +49,6 @@ Before applying this Terraform configuration, ensure you have the following:
 - `backup_vm_workloads.tf`: Associates the Compute Engine VMs with Backup Plans.
 - `backup_disk_workloads.tf`: Associates the boot disks and data disks of the VMs with Backup Plans.
 - `backup_dr_alerts.tf`: Configures monitoring alert policies and notification channels for Backup & DR events.
-- `providers.tf` (Implicitly, through definitions in other files): Contains provider configurations for Google Cloud, specifying project IDs and regions/zones. This example defines providers aliased as `gcp_compute` (for `workload-project_id`) and `gcp_bdr` (for `backup-project_id`).
 
 ## Configuration Details
 
