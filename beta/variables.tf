@@ -80,6 +80,11 @@ variable "us_disk_backup_plan_id" {
   type        = string
 }
 
+variable "us_sql_backup_plan_id" {
+  description = "The ID of the US disk backup plan"
+  type        = string
+}
+
 variable "backup_vault_us_id" {
   description = "The ID of the US backup vault"
   type        = string

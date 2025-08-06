@@ -18,8 +18,8 @@ resource "google_backup_dr_backup_plan" "au-vm-backup-plan-1" {
       time_zone           = "Australia/Sydney" #UTC is also possible
 
       backup_window {
-        start_hour_of_day = 0 #begin at midnight
-        end_hour_of_day   = 24 #complete at midnight
+        start_hour_of_day = 1 #begin at midnight
+        end_hour_of_day   = 7 #complete at midnight
       }
     }
   }
