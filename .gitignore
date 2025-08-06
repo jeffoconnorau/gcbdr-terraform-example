@@ -3,6 +3,9 @@
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
+terraform.bdr-1.bak
+terraform.tfvars.update
+terraform.tfvars_orig
 beta/
 mount/
 vms/
